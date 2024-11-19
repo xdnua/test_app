@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "290994182925",
+    "project_id": "key-word-9e35b",
+    "storage_bucket": "key-word-9e35b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290994182925:android:922040dc7cc6407f09ee44",
+        "android_client_info": {
+          "package_name": "com.lam_quen_react"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4qt26KZZBbsVPvmJzroNb9zPhqlCzDcU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

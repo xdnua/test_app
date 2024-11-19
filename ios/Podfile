@@ -21,6 +21,8 @@ target 'lam_quen_react' do
     :path => config[:reactNativePath],
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
+    # Lỗi cmake ios
+    :new_arch_enabled => false
   )
 
   target 'lam_quen_reactTests' do
