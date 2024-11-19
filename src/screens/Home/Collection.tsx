@@ -8,7 +8,7 @@ import {
   View,
 } from 'react-native';
 import {ModalAdd} from '../../components/ModalAdd';
-import {ItemBoSuuTap} from '../../components/RenderItem';
+import {ItemView2} from '../../components/RenderItem';
 import {useSelector} from 'react-redux';
 import {saveDataCollection} from '../../redux/actions/collection';
 
@@ -29,7 +29,7 @@ export default function Collection() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.titleText}>Bộ sưu tập</Text>
+        <Text style={styles.titleText}>Gần đây nhất</Text>
         <TouchableOpacity onPress={toggleModal}>
           <Text style={styles.createText}>Tạo</Text>
         </TouchableOpacity>
@@ -38,10 +38,8 @@ export default function Collection() {
       {data.length > 0 ? (
         <FlatList
           data={data}
-          columnWrapperStyle={styles.listWrapper}
-          numColumns={2}
           keyExtractor={(item, index) => `${item.name}-${index}`}
-          renderItem={({item}) => <ItemBoSuuTap item={item} />}
+          renderItem={({item}) => <ItemView2 item={item} />}
           contentContainerStyle={styles.listContainer}
         />
       ) : (
@@ -90,9 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: 'blue',
-  },
-  listWrapper: {
-    justifyContent: 'space-between',
   },
   listContainer: {
     paddingHorizontal: 8,

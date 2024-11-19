@@ -2,6 +2,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {
   Alert,
   FlatList,
+  Image,
   Modal,
   StyleSheet,
   Text,
@@ -74,7 +75,7 @@ export default function Collection2({navigation, route}: any) {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <AntDesign name="left" size={25} />
+          <Image source={require('../../assets/images/back.png')} />
         </TouchableOpacity>
       </View>
 
@@ -84,18 +85,18 @@ export default function Collection2({navigation, route}: any) {
             {store.find((itemSearch: any) => itemSearch.id === item.id)?.name}
           </Text>
           <View style={styles.collectionPrivacy}>
-            <AntDesign name="lock" size={20} />
+            <Image source={require('../../assets/images/loock.png')} />
             <Text style={styles.privacyText}>Chỉ mình tôi</Text>
           </View>
         </View>
 
         <View style={styles.actions}>
           <TouchableOpacity style={styles.actionButton} onPress={toggleModal}>
-            <AntDesign name="edit" size={20} />
+            <Image source={require('../../assets/images/pen.png')} />
             <Text style={styles.Text}>Đổi tên bộ sưu tập</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={deleteItem} style={styles.actionButton}>
-            <AntDesign name="delete" size={20} />
+            <Image source={require('../../assets/images/delete.png')} />
             <Text style={styles.Text}>Xoá bộ sưu tập</Text>
           </TouchableOpacity>
         </View>

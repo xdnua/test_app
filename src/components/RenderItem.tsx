@@ -33,10 +33,39 @@ const ItemView = ({icon, item}: {icon: boolean; item: any}) => {
             {item?.title || 'Review Nhà trọ Spider-man tập 22'}
           </Text>
           <Text style={styles.itemSubtitle}>Đã lưu từ bài viết</Text>
-          <Text style={styles.itemAuthor}>{item?.name}</Text>
+          <Text style={styles.itemAuthor}>{item?.name || ''}</Text>
         </View>
       </View>
-      <Entypo name={icon ? 'dots-three-vertical' : 'book'} size={20} />
+      {icon ? (
+        <Entypo name={'dots-three-horizontal'} size={20} />
+      ) : (
+        <Image
+          width={50}
+          height={50}
+          source={require('../assets/images/book.png')}
+        />
+      )}
+    </TouchableOpacity>
+  );
+};
+
+const ItemView2 = ({item}: {item: any}) => {
+  const navigation = useNavigation<any>();
+  console.log(item);
+
+  return (
+    <TouchableOpacity
+      style={styles.itemViewContainer}
+      onPress={() => navigation.navigate('Collection2', {item})}>
+      <View style={styles.itemViewContent}>
+        <Image style={styles.itemThumbnail} source={{uri: item?.avatar}} />
+        <View style={styles.itemViewTextContent}>
+          <Text style={styles.itemTitle}>{item?.name}</Text>
+          <Text style={styles.itemSubtitle}>Đã lưu từ bài viết</Text>
+          <Text style={styles.itemAuthor}>Nguyễn Hải Anh</Text>
+        </View>
+      </View>
+      <Entypo name={'dots-three-horizontal'} size={20} />
     </TouchableOpacity>
   );
 };
@@ -74,7 +103,7 @@ const ItempreView = ({item, index}: any) => {
           alignItems: 'center',
           marginTop: '2%',
         }}>
-        <Entypo name="dots-three-vertical" size={20} />
+        <Entypo name="dots-three-horizontal" size={20} />
         <View
           style={{
             width: 30,
@@ -131,6 +160,7 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   itemViewContainer: {
+    flex: 1,
     height: 110,
     flexDirection: 'row',
     marginBottom: 16,
@@ -147,7 +177,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   itemViewTextContent: {
-    flex: 1,
+    flex: 0.9,
     marginLeft: 12,
   },
   itemSubtitle: {
@@ -204,4 +234,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export {ItemBoSuuTap, ItemView, ItempreView};
+export {ItemBoSuuTap, ItemView, ItemView2, ItempreView};

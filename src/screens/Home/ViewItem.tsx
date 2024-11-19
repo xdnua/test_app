@@ -20,6 +20,8 @@ import {ItempreView} from '../../components/RenderItem';
 export default function ViewItem({navigation, route}: any) {
   const {item} = route.params;
 
+  const [ischeck, setIsCheck] = useState(false);
+
   const [dataComment, setDataComment] = useState([
     {
       id: 1,
@@ -51,12 +53,12 @@ export default function ViewItem({navigation, route}: any) {
           <Image
             style={styles.avatar}
             source={{
-              uri: 'https://th.bing.com/th/id/OIP.CrcpgkhSEvshgPRNoqn4RQHaHa?rs=1&pid=ImgDetMain',
+              uri: item?.image,
             }}
           />
           <View>
             <View style={styles.nameWrapper}>
-              <Text style={styles.name}>Sơn Tùng MTP</Text>
+              <Text style={styles.name}>{item?.name}</Text>
               <MaterialIcons
                 name="verified"
                 size={20}
@@ -76,10 +78,7 @@ export default function ViewItem({navigation, route}: any) {
 
       <ScrollView contentContainerStyle={styles.bodyContainer}>
         <View style={styles.body}>
-          <Text style={styles.description}>
-            Dân ca Quan họ là một trong những làn điệu dân ca tiêu biểu của vùng
-            châu thổ sông Hồng ở miền Bắc Việt Nam.
-          </Text>
+          <Text style={styles.description}>{item?.location?.name}</Text>
           <Image
             style={styles.mainImage}
             source={{
@@ -90,9 +89,27 @@ export default function ViewItem({navigation, route}: any) {
           <Text style={styles.stats}>11k thích • 6 bình luận • 2 chia sẻ</Text>
 
           <View style={styles.actionRow}>
-            {renderAction(AntDesign, 'hearto', '11k')}
+            <TouchableOpacity
+              onPress={() => setIsCheck(!ischeck)}
+              style={styles.action}>
+              <Ionicons
+                name={ischeck ? 'heart-sharp' : 'heart-outline'}
+                color={ischeck ? 'red' : null}
+                size={25}
+              />
+
+              <Text style={styles.actionText}> 11k</Text>
+            </TouchableOpacity>
             {renderAction(Ionicons, 'chatbox-ellipses-outline', '55k')}
-            {renderAction(Ionicons, 'share-outline', '11k')}
+
+            <View style={styles.action}>
+              <TouchableOpacity>
+                <Image source={require('../../assets/images/share.png')} />
+              </TouchableOpacity>
+
+              <Text style={styles.actionText}>11k</Text>
+            </View>
+
             {renderAction(MaterialCommunityIcons, 'chart-box-outline', '11k')}
           </View>
         </View>
@@ -102,7 +119,7 @@ export default function ViewItem({navigation, route}: any) {
             scrollEnabled={false}
             data={dataComment}
             renderItem={({item, index}) => (
-              console.log(index), (<ItempreView item={item} index={index} />)
+              <ItempreView item={item} index={index} />
             )}
           />
         </View>
@@ -128,7 +145,10 @@ export default function ViewItem({navigation, route}: any) {
 
 const renderAction = (IconComponent: any, iconName: string, text: string) => (
   <View style={styles.action}>
-    <IconComponent name={iconName} size={25} />
+    <TouchableOpacity onPress={() => setIs(!isc)}>
+      <IconComponent name={iconName} size={25} />
+    </TouchableOpacity>
+
     <Text style={styles.actionText}>{text}</Text>
   </View>
 );

@@ -1,19 +1,41 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
+import {
+  FlatList,
+  Image,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import axios from 'axios';
 import {ItemView} from '../../components/RenderItem';
 import Screen1 from '../Home/Collection';
 
 const SELECTIONS = [
-  {id: 1, icon: 'home', label: 'Mục đã lưu'},
-  {id: 2, icon: 'video', label: 'Video'},
-  {id: 3, icon: 'file-plus', label: 'Ảnh'},
+  {
+    id: 1,
+    label: 'Mục đã lưu',
+    icon1: require('../../assets/images/home.png'),
+    icon2: require('../../assets/images/Icon1.png'),
+  },
+  {
+    id: 2,
+    label: 'Video',
+    icon1: require('../../assets/images/video.png'),
+    icon2: require('../../assets/images/Icon2.png'),
+  },
+  {
+    id: 3,
+    label: 'Ảnh',
+    icon1: require('../../assets/images/note.png'),
+    icon2: require('../../assets/images/Icon2.png'),
+  },
 ];
 
 export default function TabScreen() {
   const [data, setData] = useState([]);
+  const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(1);
 
   const fetchData = async () => {
@@ -40,16 +62,13 @@ export default function TabScreen() {
 
   const renderNavItem = (item: any) => {
     const isActive = item.id === activeTab;
+
     return (
       <TouchableOpacity
         key={item?.id}
         onPress={() => handleTabPress(item?.id)}
         style={[styles.navItem, isActive && styles.navItemActive]}>
-        <Feather
-          name={item?.icon}
-          size={20}
-          color={isActive ? 'white' : 'black'}
-        />
+        <Image source={isActive ? item.icon2 : item.icon1} />
         <Text style={[styles.navText, isActive && styles.navTextActive]}>
           {item?.label}
         </Text>
@@ -61,11 +80,11 @@ export default function TabScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity>
-          <AntDesign name="left" size={25} />
+          <Image source={require('../../assets/images/back.png')} />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Đã lưu</Text>
         <TouchableOpacity>
-          <AntDesign name="search1" size={25} />
+          <Image source={require('../../assets/images/search.png')} />
         </TouchableOpacity>
       </View>
 
@@ -76,6 +95,12 @@ export default function TabScreen() {
       ) : (
         <View style={styles.body}>
           <FlatList
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={() => fetchData()}
+              />
+            }
             data={data}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => <ItemView icon={true} item={item} />}

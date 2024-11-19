@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {
   Alert,
+  Image,
   StyleSheet,
   Text,
   TextInput,
@@ -54,7 +55,11 @@ export const ModalAdd = ({onHandelModel, setData, check, item}: any) => {
 
         <View style={styles.privacySection}>
           <View style={styles.privacyHeader}>
-            <AntDesign name="lock" size={20} />
+            <Image
+              width={50}
+              height={50}
+              source={require('../assets/images/loock.png')}
+            />
             <Text style={styles.privacyText}>Chỉ mình tôi</Text>
           </View>
           <Text style={styles.privacyDescription} numberOfLines={2}>
